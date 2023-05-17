@@ -1,0 +1,21 @@
+.SketchBoxContainer{
+    display:flex;
+    flex-direction: column;
+    margin:auto;
+    border: 6px solid black;
+    width:40vw;
+    height:40vw;
+}
+
+.SketchSub{
+    display:flex;
+    flex-grow: 1;
+}
+
+.SketchCase{
+    flex-grow: 1;   
+}
+
+.SketchCaseNumber5{
+    background-color: black;
+}
