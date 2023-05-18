@@ -1,6 +1,6 @@
-function sketchFlex(size){
+function sketchBoxCreation(size){
 
-    //initialize counting for .SketchCase
+    //initialize counting for .SketchCaseNumber${j}
     let j = 1;
 
     //create .SketchSub divs inside .SketchBoxContainer
@@ -21,11 +21,26 @@ function sketchFlex(size){
             newDiv.classList.add(`SketchCase`);
             parent.appendChild(newDiv);  
         };
-    };
-    
-    
-    
+    };    
 };
 
+    //reset the sketchBoxContainer and change it's size according to user input
 
-sketchFlex(3);
+function change(){
+    const parent = document.querySelector(".SketchBoxContainer");
+    parent.innerHTML = "";
+    sketchBoxCreation(gridSize.value);
+};
+
+    //Passively survey the range-button
+
+const gridSize = document.getElementById("gridSize");
+gridSize.addEventListener("mouseup",change());
+
+
+
+
+
+
+
+
