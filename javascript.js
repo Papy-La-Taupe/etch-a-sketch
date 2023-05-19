@@ -37,8 +37,19 @@ function change(){
 const gridSize = document.getElementById("gridSize");
 gridSize.addEventListener("mouseup",change());
 
+    //color the cases in black by mouve-overing
 
+function blackBoxColor(number){
+    const boxToColor = document.querySelector(`.SketchCaseNumber${number}`);
+    boxToColor.setAttribute("style", "background-color: black;");
+}
 
+document.addEventListener("mouseover", function(e){
+    const boxClassesInString = e.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    blackBoxColor(boxNumber);
+});
+   
 
 
 
