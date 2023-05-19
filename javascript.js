@@ -37,19 +37,22 @@ function change(){
 const gridSize = document.getElementById("gridSize");
 gridSize.addEventListener("mouseup",change());
 
-    //color the cases in black by mouve-overing
-
-function blackBoxColor(number){
-    const boxToColor = document.querySelector(`.SketchCaseNumber${number}`);
-    boxToColor.setAttribute("style", "background-color: black;");
-}
-
-document.addEventListener("mouseover", function(e){
-    const boxClassesInString = e.target.className;
+    //color the cases in black by click-&-mouve-overing
+let colorControl;
+function blackBoxColor(data){
+    const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
-    blackBoxColor(boxNumber);
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.setAttribute("style", "background-color: black;");
+};
+
+document.addEventListener("mousedown", function(e){blackBoxColor(e);colorControl=1});
+document.addEventListener("mouseover", function(e){
+    if(colorControl > 0){
+        blackBoxColor(e);
+    };
 });
-   
+document.addEventListener("mouseup",function(e){colorControl= -1});
 
 
 
