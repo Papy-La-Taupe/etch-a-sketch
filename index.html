@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div>
-      <input type="range" id="gridSize" name="gridSize" min="5" max="100" value="5" step="5" onchange="change();">
+    <div id="CentralScreen">
+      <div id="LeftMenu">
+        <button id="ColorBlack">Black Dot</button>
+        <button id="ColorShade">10 Shades Dot</button>
+        <button id="ColorRainbow">Rainbow Dot</button>
+        <label for="ColorChoice">Pick-a-Color :</label>
+        <input type="text" id="ColorChoice" name="ColorChoice" placeholder="#000000">
+        <input type="range" id="gridSize" name="gridSize" min="5" max="100" value="5" step="5" onchange="change();">
+      </div>
+      <div class="SketchBoxContainer"></div>
     </div>
-    <div class="SketchBoxContainer"></div>
+    
     <script src="javascript.js"></script>
   </body>
 </html>

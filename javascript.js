@@ -37,6 +37,10 @@ function change(){
 const gridSize = document.getElementById("gridSize");
 gridSize.addEventListener("mouseup",change());
 
+    //give the chosen coloring to the boxes
+
+let coloring = 0;
+
     //color the cases in black by click-&-mouve-overing
 let colorControl;
 function blackBoxColor(data){

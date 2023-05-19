@@ -3,8 +3,8 @@
     flex-direction: column;
     margin:auto;
     border: 6px solid black;
-    width:40vw;
-    height:40vw;
+    width:30vw;
+    height:30vw;
 }
 
 .SketchSub{
@@ -18,4 +18,16 @@
 
 .SketchCaseNumber5{
     background-color: black;
+}
+
+#CentralScreen{
+    display: flex;
+}
+
+#LeftMenu{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15vw;
+    height: 30vw;
 }
