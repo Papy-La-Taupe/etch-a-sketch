@@ -37,12 +37,8 @@ function change(){
 const gridSize = document.getElementById("gridSize");
 gridSize.addEventListener("mouseup",change());
 
-    //give the chosen coloring to the boxes
+    //color the cases in black
 
-let coloring = 0;
-
-    //color the cases in black by click-&-mouve-overing
-let colorControl;
 function blackBoxColor(data){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
@@ -50,13 +46,53 @@ function blackBoxColor(data){
     boxToColor.setAttribute("style", "background-color: black;");
 };
 
-document.addEventListener("mousedown", function(e){blackBoxColor(e);colorControl=1});
-document.addEventListener("mouseover", function(e){
-    if(colorControl > 0){
-        blackBoxColor(e);
-    };
+    //color the cases in rainbow style
+
+const randomNumber = () => {return Math.floor(Math.random()*255)};
+const randomColor = () => {
+    const r = randomNumber(255);
+    const g = randomNumber(255);
+    const b = randomNumber(255);
+    return `rgb(${r}, ${g}, ${b})`
+}
+
+function rainbowBoxColor(data){
+    const boxClassesInString = data.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: ${randomColor()};`);
+};
+
+//give the chosen coloring to the boxes
+
+document.addEventListener("click", function(e){
+    
+    const colorModePicker = e.target.id;
+    console.log(colorModePicker);
+    let colorControl;
+    if(colorModePicker == "ColorBlack"){
+        document.addEventListener("mousedown", function(e){blackBoxColor(e);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                blackBoxColor(e);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);}); 
+    } 
+    else if(colorModePicker == "ColorRainbow"){
+        document.addEventListener("mousedown", function(e){rainbowBoxColor(e);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                rainbowBoxColor(e);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
+    }
 });
-document.addEventListener("mouseup",function(e){colorControl= -1});
+
+
+
+
 
 
 
