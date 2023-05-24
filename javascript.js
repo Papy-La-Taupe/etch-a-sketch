@@ -54,7 +54,7 @@ const randomColor = () => {
     const g = randomNumber(255);
     const b = randomNumber(255);
     return `rgb(${r}, ${g}, ${b})`
-}
+};
 
 function rainbowBoxColor(data){
     const boxClassesInString = data.target.className;
@@ -63,7 +63,57 @@ function rainbowBoxColor(data){
     boxToColor.setAttribute("style", `background-color: ${randomColor()};`);
 };
 
-//give the chosen coloring to the boxes
+
+    //chose the right color for the cases
+
+let redValue;
+let greenValue;
+let blueValue;
+let hexValue;
+
+function changeInValue(){
+    redValue = document.querySelector("#ValueRed").value;
+    greenValue = document.querySelector("#ValueGreen").value;
+    blueValue = document.querySelector("#ValueBlue").value;
+    hexValue = document.querySelector("#ColorChoice").value;
+    return console.log(redValue, greenValue, blueValue, hexValue)
+};
+
+    //set the sampler
+
+document.addEventListener("click", (e)=>{
+    const clickOnButtonSample = e.target.id;
+    console.log(clickOnButtonSample, redValue, greenValue, blueValue);
+    if (clickOnButtonSample == "HexSampleTest"){
+        const sampleBoxColoring = document.querySelector(`.HexSampleColor`);
+        sampleBoxColoring.setAttribute("style", `background-color: ${hexValue};`);
+    }
+    else if(clickOnButtonSample == "RGBSampleTest"){
+        const sampleBoxColoring = document.querySelector(`.RGBSampleColor`);
+        console.log(sampleBoxColoring);
+        sampleBoxColoring.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+    }
+});
+
+    // color the case with my RGB choice
+
+function myRGBBoxColor(data){
+    const boxClassesInString = data.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+};
+    
+        // color the case with my Hex choice
+    
+function myHexBoxColor(data){
+    const boxClassesInString = data.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: ${hexValue};`);
+};
+
+    //give the chosen coloring to the boxes
 
 document.addEventListener("click", function(e){
     
@@ -88,7 +138,27 @@ document.addEventListener("click", function(e){
         });
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
     }
+    else if(colorModePicker == "RGBSampleColor"){
+        document.addEventListener("mousedown", function(e){myRGBBoxColor(e);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                myRGBBoxColor(e);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
+    }
+    else if(colorModePicker == "HexSampleColor"){
+        document.addEventListener("mousedown", function(e){myHexBoxColor(e);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                myHexBoxColor(e);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
+    }
 });
+
+
 
 
 

@@ -13,8 +13,22 @@
         <button id="ColorBlack">Black Dot</button>
         <button id="ColorShade">10 Shades Dot</button>
         <button id="ColorRainbow">Rainbow Dot</button>
-        <label for="ColorChoice">Pick-a-Color :</label>
-        <input type="text" id="ColorChoice" name="ColorChoice" placeholder="#000000">
+
+        <p>Pick-a-Color !</p>
+        <p>(fill the blanks and click "try it !")</p>
+        <label for="ValueRed">Red :</label>
+        <input type="text" id="ValueRed" name="ValueRed" placeholder="124" onchange="changeInValue()">
+        <label for="ValueGreen">Green :</label>
+        <input type="text" id="ValueGreen" name="ValueGreen" placeholder="45" onchange="changeInValue()">
+        <label for="ValueBlue">Blue :</label>
+        <input type="text" id="ValueBlue" name="ValueBlue" placeholder="72" onchange="changeInValue()">
+        <button id="RGBSampleTest">Try it !</button>
+        <div id="RGBSampleColor" class="SampleColor RGBSampleColor" ></div>
+        <label for="ColorChoice">For the <em>Connoisseurs</em> :</label>
+        <input type="text" id="ColorChoice" name="ColorChoice" value="" placeholder="#000000" onchange="changeInValue()">
+        <button id="HexSampleTest">Try it !</button>
+        <div id="HexSampleColor" class="SampleColor HexSampleColor" ></div>
+
         <input type="range" id="gridSize" name="gridSize" min="5" max="100" value="5" step="5" onchange="change();">
       </div>
       <div class="SketchBoxContainer"></div>
