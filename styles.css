@@ -26,6 +26,13 @@
     border:1px solid black;
 }
 
+.MemorizedSampleColor{
+    max-width:5vw;
+    min-height: 5vw;
+    border:1px solid black;
+    border-radius: 2.5vw;
+}
+
 #CentralScreen{
     display: flex;
 }

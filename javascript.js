@@ -104,7 +104,7 @@ function myRGBBoxColor(data){
     boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
 };
     
-        // color the case with my Hex choice
+    // color the case with my Hex choice
     
 function myHexBoxColor(data){
     const boxClassesInString = data.target.className;
@@ -113,13 +113,35 @@ function myHexBoxColor(data){
     boxToColor.setAttribute("style", `background-color: ${hexValue};`);
 };
 
-    //give the chosen coloring to the boxes
+    // store a RGB color in the palette
 
+function myRGBColorPalette(data)
+{
+    const boxClassesInString = data.target.id;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+}
+
+    // store a Hex color in the palette
+
+function myHexColorPalette(data)
+{
+    const boxClassesInString = data.target.id;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: ${hexValue};`);
+}
+
+    //give the chosen coloring to the boxes & create a history of picking
+let historyControl= 1;
 document.addEventListener("click", function(e){
     
     const colorModePicker = e.target.id;
     console.log(colorModePicker);
     let colorControl;
+    //color in black Mode
+
     if(colorModePicker == "ColorBlack"){
         document.addEventListener("mousedown", function(e){blackBoxColor(e);colorControl=1});
         document.addEventListener("mouseover", function(e){
@@ -129,6 +151,8 @@ document.addEventListener("click", function(e){
         });
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);}); 
     } 
+    //color in rainbow Mode
+
     else if(colorModePicker == "ColorRainbow"){
         document.addEventListener("mousedown", function(e){rainbowBoxColor(e);colorControl=1});
         document.addEventListener("mouseover", function(e){
@@ -138,6 +162,8 @@ document.addEventListener("click", function(e){
         });
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
     }
+    //color in chosen RGB
+
     else if(colorModePicker == "RGBSampleColor"){
         document.addEventListener("mousedown", function(e){myRGBBoxColor(e);colorControl=1});
         document.addEventListener("mouseover", function(e){
@@ -145,8 +171,29 @@ document.addEventListener("click", function(e){
                 myRGBBoxColor(e);
             };
         });
+    //implementing a history control for RGB
+
+        if (historyControl <=5){
+            const history = document.querySelector(`#ColorHistory${historyControl}`);
+            history.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+            historyControl ++;
+        }
+        else {
+            historyControl = 1;
+            const history = document.querySelector(`#ColorHistory${historyControl}`);
+            history.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+            historyControl ++;
+        };
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
+        document.addEventListener("click", function(e){
+            const palette = e.target.className;
+            if(palette == "MemorizedSampleColor ColorPaletteSample"){
+                myRGBColorPalette(e);
+            };
+        });
     }
+    //color in chosen Hex
+
     else if(colorModePicker == "HexSampleColor"){
         document.addEventListener("mousedown", function(e){myHexBoxColor(e);colorControl=1});
         document.addEventListener("mouseover", function(e){
@@ -154,7 +201,26 @@ document.addEventListener("click", function(e){
                 myHexBoxColor(e);
             };
         });
+    //implementing a history control for Hex
+
+        if (historyControl <=5){
+            const history = document.querySelector(`#ColorHistory${historyControl}`);
+            history.setAttribute("style", `background-color: ${hexValue};`);
+            historyControl ++;
+        }
+        else {
+            historyControl = 1;
+            const history = document.querySelector(`#ColorHistory${historyControl}`);
+            history.setAttribute("style", `background-color: ${hexValue};`);
+            historyControl ++;
+        };
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
+        document.addEventListener("click", function(e){
+            const palette = e.target.className;
+            if(palette == "MemorizedSampleColor ColorPaletteSample"){
+                myHexColorPalette(e);
+            };
+        });
     }
 });
 
