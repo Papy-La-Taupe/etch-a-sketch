@@ -46,6 +46,15 @@ function blackBoxColor(data){
     boxToColor.setAttribute("style", "background-color: black;");
 };
 
+    //color with my own color
+
+function myOwnBoxColor(data, colorPaletteData){
+    const boxClassesInString = data.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.setAttribute("style", `background-color: ${colorPaletteData};`);
+};
+
     //color the cases in rainbow style
 
 const randomNumber = () => {return Math.floor(Math.random()*255)};
@@ -76,7 +85,6 @@ function changeInValue(){
     greenValue = document.querySelector("#ValueGreen").value;
     blueValue = document.querySelector("#ValueBlue").value;
     hexValue = document.querySelector("#ColorChoice").value;
-    return console.log(redValue, greenValue, blueValue, hexValue)
 };
 
     //set the sampler
@@ -138,17 +146,35 @@ function myHexColorPalette(data)
     //give the chosen coloring to the boxes & create a history of picking
 let historyControl= 1;
 let dataStorageMode = 0;
+
+
 document.addEventListener("click", function(e){
     
     const colorModePicker = e.target.id;
     console.log(colorModePicker);
     let colorControl;
-    
+    let colorPaletteData;
     //activate save button
     
     if(colorModePicker == "RGBStoreData"){dataStorageMode = 1;}
     else if(colorModePicker == "HexStoreData"){dataStorageMode = 2;}
     
+    //color with palette
+
+    else if(/^ColorPalette\d+$/.test(colorModePicker) || /^ColorHistory\d+$/.test(colorModePicker)){
+        const getID = document.querySelector(`#${colorModePicker}`);
+        console.log(getID, colorModePicker);
+        const styles = window.getComputedStyle(getID);
+        colorPaletteData = styles.getPropertyValue('background-color');
+        document.addEventListener("mousedown", function(e){myOwnBoxColor(e, colorPaletteData);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                myOwnBoxColor(e, colorPaletteData);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);}); 
+    }
+
     //color in black Mode
 
     else if(colorModePicker == "ColorBlack"){
@@ -193,6 +219,9 @@ document.addEventListener("click", function(e){
             history.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
             historyControl ++;
         };
+
+        //implementing the RGB data storage in palette
+
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
         document.addEventListener("click", function(e){
             const palette = e.target.className;
@@ -223,6 +252,9 @@ document.addEventListener("click", function(e){
             history.setAttribute("style", `background-color: ${hexValue};`);
             historyControl ++;
         };
+
+    //implementing the Hex data storage in palette
+
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
         document.addEventListener("click", function(e){
             const palette = e.target.className;
