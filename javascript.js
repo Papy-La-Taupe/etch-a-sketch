@@ -121,6 +121,7 @@ function myRGBColorPalette(data)
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
     boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
+    dataStorageMode = 0;
 }
 
     // store a Hex color in the palette
@@ -131,18 +132,26 @@ function myHexColorPalette(data)
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
     boxToColor.setAttribute("style", `background-color: ${hexValue};`);
+    dataStorageMode = 0;
 }
 
     //give the chosen coloring to the boxes & create a history of picking
 let historyControl= 1;
+let dataStorageMode = 0;
 document.addEventListener("click", function(e){
     
     const colorModePicker = e.target.id;
     console.log(colorModePicker);
     let colorControl;
+    
+    //activate save button
+    
+    if(colorModePicker == "RGBStoreData"){dataStorageMode = 1;}
+    else if(colorModePicker == "HexStoreData"){dataStorageMode = 2;}
+    
     //color in black Mode
 
-    if(colorModePicker == "ColorBlack"){
+    else if(colorModePicker == "ColorBlack"){
         document.addEventListener("mousedown", function(e){blackBoxColor(e);colorControl=1});
         document.addEventListener("mouseover", function(e){
             if(colorControl > 0){
@@ -187,7 +196,7 @@ document.addEventListener("click", function(e){
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
         document.addEventListener("click", function(e){
             const palette = e.target.className;
-            if(palette == "MemorizedSampleColor ColorPaletteSample"){
+            if(palette == "MemorizedSampleColor ColorPaletteSample" && dataStorageMode == 1){
                 myRGBColorPalette(e);
             };
         });
@@ -217,7 +226,7 @@ document.addEventListener("click", function(e){
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);});
         document.addEventListener("click", function(e){
             const palette = e.target.className;
-            if(palette == "MemorizedSampleColor ColorPaletteSample"){
+            if(palette == "MemorizedSampleColor ColorPaletteSample" && dataStorageMode == 2){
                 myHexColorPalette(e);
             };
         });
