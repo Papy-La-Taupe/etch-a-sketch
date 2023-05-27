@@ -159,6 +159,19 @@ document.addEventListener("click", function(e){
     if(colorModePicker == "RGBStoreData"){dataStorageMode = 1;}
     else if(colorModePicker == "HexStoreData"){dataStorageMode = 2;}
     
+    //clear the board
+
+    else if(colorModePicker == "ColorClear"){
+        for(let i = 1;i<100;i++){
+            const clear = document.querySelector(`.SketchCaseNumber${i}`);
+            if(clear){
+                clear.setAttribute("style", `background-color: white;`);
+            }
+            else break;
+            
+        };
+    } 
+
     //color with palette
 
     else if(/^ColorPalette\d+$/.test(colorModePicker) || /^ColorHistory\d+$/.test(colorModePicker)){
