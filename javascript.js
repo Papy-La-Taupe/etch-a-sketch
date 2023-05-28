@@ -46,6 +46,26 @@ function blackBoxColor(data){
     boxToColor.setAttribute("style", "background-color: black;");
 };
 
+    //color the case in shades
+
+function shadeBoxColor(data) {
+    const boxClassesInString = data.target.className;
+    let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
+    const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    const computedStyle = window.getComputedStyle(boxToColor);
+    const shader = computedStyle.getPropertyValue("opacity");
+    const numberisation = parseFloat(shader);
+    const realFuckingNumber = numberisation+0.1;
+    boxToColor.removeAttribute("style");
+    if (numberisation === 0.9) {
+        boxToColor.setAttribute("style", "background-color: rgb(0,0,0); opacity: 1;");
+    } else if (numberisation < 0.9) { 
+        boxToColor.setAttribute("style", `background-color: rgb(0,0,0); opacity: ${realFuckingNumber.toFixed(1)};`);
+    } else if (numberisation > 0.9) {
+        boxToColor.setAttribute("style", "background-color: rgb(0,0,0); opacity: 0.1;");
+    };
+};    
+
     //color with my own color
 
 function myOwnBoxColor(data, colorPaletteData){
@@ -199,6 +219,21 @@ document.addEventListener("click", function(e){
         });
         document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);}); 
     } 
+
+    //color in shades
+    
+    else if(colorModePicker == "ColorShade"){
+        document.addEventListener("mousedown", function(e){shadeBoxColor(e);colorControl=1});
+        document.addEventListener("mouseover", function(e){
+            if(colorControl > 0){
+                shadeBoxColor(e);
+            };
+        });
+        document.addEventListener("mouseup",function(e){colorControl= 0; console.log(colorModePicker);}); 
+    } 
+
+    
+
     //color in rainbow Mode
 
     else if(colorModePicker == "ColorRainbow"){
