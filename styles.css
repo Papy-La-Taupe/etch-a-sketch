@@ -1,5 +1,5 @@
 *{
-    border:solid purple 1px;
+    color: aliceblue;
     
 }
 
@@ -8,15 +8,22 @@ html {
   }
   *, *:before, *:after {
     box-sizing: inherit;
+    
   }
+
+ body{
+    background-color: rgb(41, 45, 51);
+ } 
 
 .SketchBoxContainer{
     display:flex;
     flex-direction: column;
     margin:auto;
+    margin-left: 8vw;
     border: 6px solid black;
     width:30vw;
     height:30vw;
+    background-color: aliceblue;
 }
 
 .SketchSub{
@@ -32,6 +39,7 @@ html {
     max-width:5vw;
     min-height: 5vw;
     border:1px solid black;
+    background-color: aliceblue;
 }
 
 .MemorizedSampleColor{
@@ -39,6 +47,7 @@ html {
     min-height: 5vw;
     border:1px solid black;
     border-radius: 2.5vw;
+    background-color: aliceblue;
 }
 
 #TitleDisplay{
@@ -72,20 +81,56 @@ html {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 30vw;
-    height: 40vw;
+    width: 50vw;
+    height: auto;
 }
 
 #ButtonsMenu{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    flex-shrink: 1;
 }
 
 #PaletteMenu{
     align-self: center;
+    margin-left: 8vw;
+    flex-shrink: 0;
 }
 
 #HistoryMenu{
     align-self: center;
+    flex-shrink: 0;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+label{
+    margin-top: 2px;
+}
+
+button{
+    border-radius: 10px;
+    border: solid 2px grey;
+    box-shadow: inset;
+    margin-bottom: 2px;
+    background-color: lightblue;
+    color: black;
+
+}
+
+#ColorPalette{
+    margin-bottom: 10px;
+    border: solid 2px grey;
+    border-radius: 10px;
+    box-shadow: inset;
+}
+
+#ColorHistory{
+    margin-bottom: 10px;
+    border: solid 2px grey;
+    border-radius: 10px;
+    box-shadow: inset;
 }

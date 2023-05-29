@@ -43,6 +43,7 @@ function blackBoxColor(data){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", "background-color: black;");
 };
 
@@ -72,6 +73,7 @@ function myOwnBoxColor(data, colorPaletteData){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: ${colorPaletteData};`);
 };
 
@@ -89,6 +91,7 @@ function rainbowBoxColor(data){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: ${randomColor()};`);
 };
 
@@ -111,14 +114,15 @@ function changeInValue(){
 
 document.addEventListener("click", (e)=>{
     const clickOnButtonSample = e.target.id;
-    console.log(clickOnButtonSample, redValue, greenValue, blueValue);
+    
     if (clickOnButtonSample == "HexSampleTest"){
         const sampleBoxColoring = document.querySelector(`.HexSampleColor`);
+        boxToColor.removeAttribute("style");
         sampleBoxColoring.setAttribute("style", `background-color: ${hexValue};`);
     }
     else if(clickOnButtonSample == "RGBSampleTest"){
         const sampleBoxColoring = document.querySelector(`.RGBSampleColor`);
-        console.log(sampleBoxColoring);
+        boxToColor.removeAttribute("style");
         sampleBoxColoring.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
     }
 });
@@ -129,6 +133,7 @@ function myRGBBoxColor(data){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
 };
     
@@ -138,6 +143,7 @@ function myHexBoxColor(data){
     const boxClassesInString = data.target.className;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`.SketchCaseNumber${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: ${hexValue};`);
 };
 
@@ -148,6 +154,7 @@ function myRGBColorPalette(data)
     const boxClassesInString = data.target.id;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: RGB(${redValue}, ${greenValue}, ${blueValue});`);
     dataStorageMode = 0;
 }
@@ -159,6 +166,7 @@ function myHexColorPalette(data)
     const boxClassesInString = data.target.id;
     let boxNumber = boxClassesInString.split(/\D/g).filter(Number).toString();
     const boxToColor = document.querySelector(`#ColorPalette${boxNumber}`);
+    boxToColor.removeAttribute("style");
     boxToColor.setAttribute("style", `background-color: ${hexValue};`);
     dataStorageMode = 0;
 }
@@ -171,7 +179,7 @@ let dataStorageMode = 0;
 document.addEventListener("click", function(e){
     
     const colorModePicker = e.target.id;
-    console.log(colorModePicker);
+    
     let colorControl;
     let colorPaletteData;
     //activate save button
@@ -185,7 +193,7 @@ document.addEventListener("click", function(e){
         for(let i = 1;i<100;i++){
             const clear = document.querySelector(`.SketchCaseNumber${i}`);
             if(clear){
-                clear.setAttribute("style", `background-color: white;`);
+                clear.removeAttribute("style");
             }
             else break;
             
@@ -196,7 +204,7 @@ document.addEventListener("click", function(e){
 
     else if(/^ColorPalette\d+$/.test(colorModePicker) || /^ColorHistory\d+$/.test(colorModePicker)){
         const getID = document.querySelector(`#${colorModePicker}`);
-        console.log(getID, colorModePicker);
+        
         const styles = window.getComputedStyle(getID);
         colorPaletteData = styles.getPropertyValue('background-color');
         document.addEventListener("mousedown", function(e){myOwnBoxColor(e, colorPaletteData);colorControl=1});
